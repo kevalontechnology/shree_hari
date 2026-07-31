@@ -1,0 +1,208 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api/axios";
+
+const Register = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    role: "Executive",
+    branch: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setError("");
+    setSuccess("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/register", formData);
+      if (res.data.isApproved) {
+        setSuccess("Registration Successful! Redirecting...");
+      } else {
+        setSuccess("Registration Successful. Waiting for Admin Approval.");
+      }
+      setTimeout(() => {
+        navigate("/login");
+      }, 2500);
+    } catch (err) {
+      setError(
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        "Registration Failed"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex justify-center items-center p-4 sm:p-8 transition-colors">
+      <div className="w-full max-w-2xl bg-white   rounded-3xl p-6 sm:p-10 border border-slate-100  shadow-xl shadow-slate-200/50 dark:shadow-none transition-colors">
+        
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-extrabold text-slate-900  tracking-tight">Create Account</h1>
+          <p className="text-sm font-medium text-slate-500  mt-2 uppercase tracking-wider">Shree Hari Export House CRM</p>
+        </div>
+
+        {error && (
+          <div className="mb-6 p-4 rounded-xl bg-rose-50  border border-rose-200  text-rose-700  text-sm font-medium flex items-center gap-2">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-6 p-4 rounded-xl bg-emerald-50  border border-emerald-200  text-emerald-700  text-sm font-medium flex items-center gap-2">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+            {success}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium placeholder-slate-400"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Phone Number</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                required
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium placeholder-slate-400"
+                placeholder="+91 98765 43210"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium placeholder-slate-400"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Role</label>
+              <select
+                name="role"
+                required
+                value={formData.role}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium appearance-none"
+              >
+                <option value="Admin">Admin</option>
+                <option value="Team Leader">Team Leader</option>
+                <option value="Executive">Executive</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Branch</label>
+              <select
+                name="branch"
+                required
+                value={formData.branch}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium appearance-none"
+              >
+                <option value="" disabled>Select Branch</option>
+                <option value="Head Office">Head Office</option>
+                <option value="Mumbai Port Branch">Mumbai Port Branch</option>
+                <option value="Gujarat Branch">Gujarat Branch</option>
+              </select>
+            </div>
+
+            <div className="hidden sm:block"></div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Password</label>
+              <input
+                type="password"
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium placeholder-slate-400"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700  mb-1.5">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                required
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200  bg-slate-50  text-slate-900  focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium placeholder-slate-400"
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading || success}
+            className="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md shadow-indigo-200 dark:shadow-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+          >
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-white border-r-transparent rounded-full animate-spin"></div>
+            ) : (
+              "Create Account"
+            )}
+          </button>
+        </form>
+
+        <p className="mt-8 text-center text-sm font-medium text-slate-500 ">
+          Already have an account?{" "}
+          <Link to="/login" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">
+            Login here
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Register;

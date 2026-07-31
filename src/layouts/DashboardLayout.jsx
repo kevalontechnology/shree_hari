@@ -12,13 +12,11 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { useTheme } from '../context/ThemeContext';
 import companyLogo from '../assets/logo.jpg';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
   const user = JSON.parse(localStorage.getItem('user')) || { name: 'Admin User', role: 'Administrator' };
 
   // Managing dropdown state for the Master menu

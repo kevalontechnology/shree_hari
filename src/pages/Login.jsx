@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import companyLogo from '../assets/logo.jpg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,16 +41,14 @@ const Login = () => {
     <div className="min-h-screen bg-slate-50 flex justify-center items-center p-4 transition-colors">
       <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-500 transition-colors">
         
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center mb-4">
-            <div className="flex h-12">
-              <div className="w-3 h-full bg-amber-500 rounded-l-md mr-1"></div>
-              <div className="w-3 h-3/4 bg-indigo-500 rounded-r-md self-end"></div>
+        <div className="flex flex-col items-center justify-center text-center mb-8">
+          <div className="flex items-center justify-center mb-4 w-full">
+            <div className="flex items-center justify-center h-12">
+              <img src={companyLogo} alt="Shree Hari Logo" className="h-10 w-auto object-contain hidden sm:block" />
+              <img src={companyLogo} alt="Shree Hari Logo" className="h-8 w-auto object-contain sm:hidden" />
             </div>
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900  tracking-tight uppercase">Shree Hari</h1>
-          <h2 className="text-sm font-bold tracking-widest text-slate-500  mt-1 uppercase">Export House</h2>
-          <p className="text-xs font-semibold text-indigo-600  mt-2 bg-indigo-50  inline-block px-3 py-1 rounded-full">Export Documentation CRM</p>
+          <p className="text-xs font-semibold text-indigo-600 mt-2 bg-indigo-50 inline-block px-3 py-1 rounded-full text-center">Export Documentation CRM</p>
         </div>
 
         {error && (

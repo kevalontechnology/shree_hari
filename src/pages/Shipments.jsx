@@ -92,7 +92,7 @@ const handleStatusChange = async (id, newStatus) => {
   };
 
   return (
-    <div className="w-full relative min-h-screen bg-slate-50 dark:bg-slate-900 p-4 sm:p-6 lg:p-8 transition-colors">
+    <div className="w-full relative min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8 transition-colors">
       <div className="w-full bg-white border border-slate-200/80 shadow-2xs rounded-md overflow-hidden">
         
         {/* Header */}
@@ -130,17 +130,17 @@ const handleStatusChange = async (id, newStatus) => {
                 <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50">
+          <tbody className="divide-y divide-slate-100 ">
             {loading ? (
               <tr>
                 <td colSpan="5" className="text-center py-12">
                   <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-r-transparent rounded-full animate-spin"></div>
-                  <p className="mt-3 text-slate-400 dark:text-slate-500 font-medium text-sm">Loading shipments...</p>
+                  <p className="mt-3 text-slate-400 font-medium text-sm">Loading shipments...</p>
                 </td>
               </tr>
             ) : shipments.length > 0 ? (
               shipments.map((item, idx) => (
-                <tr key={item._id || idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors group">
+                <tr key={item._id || idx} className="hover:bg-slate-50/50 transition-colors group">
                   <td className="px-6 py-4 text-slate-500  font-medium">{idx + 1}</td>
                   <td className="px-6 py-4 font-bold text-slate-800 ">
                     <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-100  border border-slate-200/60  text-xs tracking-wide">
@@ -162,8 +162,8 @@ const handleStatusChange = async (id, newStatus) => {
                           (item.status || 'Pending') === 'Complied' 
                             ? 'bg-emerald-50  text-emerald-700  border-emerald-200  focus:ring-emerald-500/20'
                             : item.status === 'Ongoing'
-                            ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-500/20 focus:ring-blue-500/20'
-                            : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-500/20 focus:ring-amber-500/20'
+                            ? 'bg-blue-50 text-blue-700  border-blue-200 focus:ring-blue-500/20'
+                            : 'bg-amber-50 text-amber-700  border-amber-200 focus:ring-amber-500/20'
                         }`}
                       >
                         <option value="Pending">Pending</option>
@@ -181,7 +181,7 @@ const handleStatusChange = async (id, newStatus) => {
                   <td className="px-6 py-4 flex items-center justify-end gap-2">
                     <button 
                       onClick={() => navigate(`/dashboard/master-form/${item._id}`)} 
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 border border-transparent dark:border-indigo-500/20 transition-colors"
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg text-indigo-600 bg-indigo-50  hover:bg-indigo-100 border border-transparent transition-colors"
                     >
                       View Details
                     </button>
@@ -208,7 +208,7 @@ const handleStatusChange = async (id, newStatus) => {
                               <button 
                                 key={doc}
                                 onClick={() => handleDownloadPdf(item._id, doc)} 
-                                className="w-full text-left px-4 py-2 text-slate-700  hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center justify-between group"
+                                className="w-full text-left px-4 py-2 text-slate-700  hover:bg-slate-50 hover:text-indigo-600 transition-colors flex items-center justify-between group"
                               >
                                 <span>{doc}</span>
                                 <svg className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>

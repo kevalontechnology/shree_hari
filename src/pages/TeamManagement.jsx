@@ -186,7 +186,7 @@ const TeamManagement = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 bg-slate-50 min-h-screen transition-colors">
       {/* Header */}
       <div className="flex justify-between items-center px-4 py-3 bg-[#2B3542] text-white rounded-md">
         <h1 className="text-sm font-bold tracking-wide">
@@ -307,8 +307,8 @@ const TeamManagement = () => {
             onClick={() => setActiveTab("pending")}
             className={`flex-1 md:flex-initial flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap ${
               activeTab === "pending"
-                ? "bg-white   text-amber-600 dark:text-amber-400 shadow-sm"
-                : "text-slate-600  hover:text-slate-900 dark:hover:text-slate-200"
+                ? "bg-white   text-amber-600 shadow-sm"
+                : "text-slate-600  hover:text-slate-900"
             }`}
           >
             <span>Pending</span>
@@ -319,7 +319,7 @@ const TeamManagement = () => {
             className={`flex-1 md:flex-initial flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap ${
               activeTab === "approved"
                 ? "bg-white   text-emerald-600  shadow-sm"
-                : "text-slate-600  hover:text-slate-900 dark:hover:text-slate-200"
+                : "text-slate-600  hover:text-slate-900 "
             }`}
           >
             <span>Approved</span>
@@ -330,7 +330,7 @@ const TeamManagement = () => {
             className={`flex-1 md:flex-initial flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap ${
               activeTab === "rejected"
                 ? "bg-white   text-rose-600  shadow-sm"
-                : "text-slate-600  hover:text-slate-900 dark:hover:text-slate-200"
+                : "text-slate-600  hover:text-slate-900 "
             }`}
           >
             <span>Rejected</span>
@@ -381,11 +381,11 @@ const TeamManagement = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50 text-sm">
+              <tbody className="divide-y divide-slate-100 text-sm">
                 {users.map((user) => (
                   <tr
                     key={user._id}
-                    className="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition duration-150"
+                    className="hover:bg-slate-50/50 transition duration-150"
                   >
                     {/* User */}
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -416,7 +416,7 @@ const TeamManagement = () => {
                     {/* Status */}
                     <td className="px-6 py-4 whitespace-nowrap">
                       {activeTab === "pending" && (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-medium border border-transparent dark:border-amber-500/20">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50  text-amber-700 text-xs font-medium border border-transparent ">
                           <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
                           Pending
                         </span>
@@ -451,7 +451,7 @@ const TeamManagement = () => {
                         {(activeTab === "pending" || activeTab === "approved") && (
                           <button
                             onClick={() => handleReject(user._id, user.name)}
-                            className="flex items-center gap-1.5 bg-rose-50  hover:bg-rose-100 dark:hover:bg-rose-500/20 text-rose-700  text-xs font-semibold px-3 py-1.5 rounded-lg transition border border-transparent "
+                            className="flex items-center gap-1.5 bg-rose-50  hover:bg-rose-100 text-rose-700  text-xs font-semibold px-3 py-1.5 rounded-lg transition border border-transparent "
                           >
                             <IconClose />
                             Reject

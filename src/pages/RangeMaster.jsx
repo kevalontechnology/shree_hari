@@ -142,14 +142,14 @@ const RangeMaster = () => {
                 <th className="p-3 font-bold uppercase tracking-wider text-xs">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
                   <td colSpan="5" className="text-center p-6 text-slate-500  font-medium">Loading data...</td>
                 </tr>
               ) : ranges.length > 0 ? (
                 ranges.map((item, idx) => (
-                  <tr key={item._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                  <tr key={item._id} className="hover:bg-slate-50 transition-colors group">
                     <td className="p-3 text-slate-600 ">{idx + 1}</td>
                     <td className="p-3 font-bold text-slate-900 ">{item.range} {item.rangeCode && <span className="text-slate-400 font-normal">({item.rangeCode})</span>}</td>
                     <td className="p-3 text-slate-700 ">{item.division} {item.divisionCode && <span className="text-slate-400 font-normal">({item.divisionCode})</span>}</td>
@@ -157,13 +157,13 @@ const RangeMaster = () => {
                     <td className="p-3 flex gap-2">
                       <button 
                         onClick={() => handleOpenEditModal(item)} 
-                        className="text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-200 dark:border-indigo-500/30 px-3 py-1 rounded-lg text-xs hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-colors"
+                        className="text-indigo-600 font-bold border border-indigo-200 px-3 py-1 rounded-lg text-xs hover:bg-indigo-50  transition-colors"
                       >
                         Edit
                       </button>
                       <button 
                         onClick={() => handleDelete(item._id)} 
-                        className="text-rose-600  font-bold border border-rose-200 dark:border-rose-500/30 px-3 py-1 rounded-lg text-xs hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors"
+                        className="text-rose-600  font-bold border border-rose-200 px-3 py-1 rounded-lg text-xs hover:bg-rose-50 transition-colors"
                       >
                         Delete
                       </button>
@@ -183,7 +183,7 @@ const RangeMaster = () => {
 
       {/* Modal with blur background */}
       {isModalOpen && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-slate-900/50 dark:bg-slate-900/70 flex justify-center items-center z-50 p-4">
+        <div className="fixed inset-0 backdrop-blur-sm bg-slate-900/50  flex justify-center items-center z-50 p-4">
           <div className="bg-white   p-6 rounded-2xl w-[650px] shadow-2xl relative max-h-[90vh] overflow-y-auto border border-slate-200 ">
             <div className="flex justify-between items-center mb-6 border-b border-slate-200  pb-4">
               <h3 className="text-xl font-black text-slate-900  tracking-tight">

@@ -2,7 +2,7 @@ import React from "react";
 
 const PackingList = ({ data = {} }) => {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 transition-colors print:bg-white print:py-0">
+    <div className="min-h-screen bg-slate-50 py-8 transition-colors print:bg-white print:py-0">
       <div className="w-[210mm] mx-auto bg-white text-black font-sans text-xs flex flex-col p-8 shadow-lg print:shadow-none print:w-full print:p-0 print:m-0 border border-slate-200 print:border-none">
         
         {/* Heading */}

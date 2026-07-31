@@ -58,8 +58,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex justify-center items-center p-4 sm:p-8 transition-colors">
-      <div className="w-full max-w-2xl bg-white   rounded-3xl p-6 sm:p-10 border border-slate-100  shadow-xl shadow-slate-200/50 dark:shadow-none transition-colors">
+    <div className="min-h-screen bg-slate-50 flex justify-center items-center p-4 sm:p-8 transition-colors">
+      <div className="w-full max-w-2xl bg-white   rounded-3xl p-6 sm:p-10 border border-slate-100  shadow-xl shadow-slate-200/50 transition-colors">
         
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold text-slate-900  tracking-tight">Create Account</h1>
@@ -184,7 +184,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading || success}
-            className="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md shadow-indigo-200 dark:shadow-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+            className="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md shadow-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 transition-all flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed mt-4"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-r-transparent rounded-full animate-spin"></div>
@@ -196,7 +196,7 @@ const Register = () => {
 
         <p className="mt-8 text-center text-sm font-medium text-slate-500 ">
           Already have an account?{" "}
-          <Link to="/login" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-bold transition-colors">
+          <Link to="/login" className="text-indigo-600  hover:text-indigo-700 font-bold transition-colors">
             Login here
           </Link>
         </p>

@@ -85,10 +85,15 @@ const handleStatusChange = async (id, newStatus) => {
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-      alert('Failed to generate PDF. Ensure the backend server is running and check console for details.');
-    }
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+          console.error("Backend Error Details:", error.response.data.error);
+          alert("Backend Error: " + error.response.data.error);
+        } else {
+          console.error("Error generating PDF:", error);
+          alert("Failed to generate PDF. Please try again.");
+        }
+      }
   };
 
   return (

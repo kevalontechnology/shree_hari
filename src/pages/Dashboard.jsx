@@ -167,11 +167,11 @@ const Dashboard = () => {
           </div>
           <div className="relative w-full sm:w-80">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fontSize="small" />
-            <input 
+            {/* <input 
               type="text" 
               placeholder="Search recent shipments..." 
               className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-md text-xs bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-2xs"
-            />
+            /> */}
           </div>
         </div>
 

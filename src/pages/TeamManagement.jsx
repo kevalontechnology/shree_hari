@@ -186,7 +186,7 @@ const TeamManagement = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 bg-slate-50 min-h-screen transition-colors">
+    <div className=" space-y-6 bg-slate-50 min-h-screen transition-colors">
       {/* Header */}
       <div className="flex justify-between items-center px-4 py-3 bg-[#2B3542] text-white rounded-md">
         <h1 className="text-sm font-bold tracking-wide">

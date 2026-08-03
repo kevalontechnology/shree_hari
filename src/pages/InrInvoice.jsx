@@ -43,6 +43,7 @@ const InrInvoice = () => {
     fetchData();
   }, [id]);
 
+  
   useEffect(() => {
     if (!loading && shipment) {
       setTimeout(() => {

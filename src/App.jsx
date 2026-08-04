@@ -12,6 +12,8 @@ import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
 import InrInvoice from './pages/InrInvoice';
+import PaymentDetails from './pages/PaymentDetails';
+import ProformaInvoice from './pages/ProformaInvoice';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Import your new Master Data pages
@@ -20,7 +22,11 @@ import BuyerMaster from './pages/BuyerMaster';
 import ManufacturerMaster from './pages/ManufacturerMaster';
 import Exporter from './pages/ExporterProfile';
 import RangeMaster from './pages/RangeMaster';
+import BankMaster from './pages/BankMaster';
 
+
+import PartyWiseReport from './pages/PartyWiseReport';
+import ItemWiseReport from './pages/ItemWiseReport';
 function App() {
   return (
     <Router>
@@ -46,6 +52,8 @@ function App() {
           <Route path="shipments" element={<Shipments />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="/dashboard/proforma-invoice" element={<ProformaInvoice />} /> 
+          <Route path="payment-details" element={<PaymentDetails />} />
           {/* <Route path="templates" element={<Templates />} />
           <Route path="builder" element={<TemplateBuilder />} /> */}
           
@@ -53,6 +61,8 @@ function App() {
             <Route path="master-form" element={<MasterForm />} />
             <Route path="master-form/:id" element={<MasterForm />} />
             <Route path="templates" element={<Templates />} />
+            <Route path="party-wise" element={<PartyWiseReport />} />
+  <Route path="item-wise" element={<ItemWiseReport />} />
             
             {/* New Master Data Routes */}
             <Route path="master-data/product" element={<ProductMaster />} />
@@ -60,6 +70,7 @@ function App() {
             <Route path="master-data/manufacturer" element={<ManufacturerMaster />} />
             <Route path="master-data/range" element={<RangeMaster />} />
             <Route path="master-data/exporter" element={<Exporter/>}/>
+            <Route path="master-data/bank" element={<BankMaster />} />
 
           </Route>
 

@@ -12,6 +12,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PaymentIcon from '@mui/icons-material/Payment';
+import AssessmentIcon from '@mui/icons-material/Assessment'; // Reports આઇકોન ઉમેર્યો
 import companyLogo from '../assets/logo.jpg';
 
 const DashboardLayout = () => {
@@ -19,8 +22,9 @@ const DashboardLayout = () => {
   const location = useLocation();
   const user = JSON.parse(localStorage.getItem('user')) || { name: 'Admin User', role: 'Administrator' };
 
-  // Managing dropdown state for the Master menu
+  // Managing dropdown state for Master & Reports menu
   const [isMasterDataOpen, setIsMasterDataOpen] = useState(false);
+  const [isReportsOpen, setIsReportsOpen] = useState(false); // Reports ડ્રોપડાઉન સ્ટેટ
 
   // Sidebar collapse and mobile drawer state
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -61,27 +65,36 @@ const DashboardLayout = () => {
     navigate('/login');
   };
 
-  // Menu items WITHOUT Builder
+  // Menu items including Performa Invoice & Payment Details
   const menuItems = [
     { text: 'Dashboard', icon: <DashboardIcon fontSize="small" />, path: '/dashboard', allowedRoles: ['Admin', 'Team Leader', 'Executive'] },
+    { text: 'Performa Invoice', icon: <ReceiptIcon fontSize="small" />, path: '/dashboard/proforma-invoice', allowedRoles: ['Admin', 'Team Leader', 'Executive'] },
+    { text: 'Payment Details', icon: <PaymentIcon fontSize="small" />, path: '/dashboard/payment-details', allowedRoles: ['Admin', 'Team Leader', 'Executive'] },
     { text: 'Shipment & Docs', icon: <DescriptionIcon fontSize="small" />, path: '/dashboard/shipments', allowedRoles: ['Admin', 'Team Leader', 'Executive'] },
     { text: 'Team Management', icon: <PeopleIcon fontSize="small" />, path: '/dashboard/team', allowedRoles: ['Admin'] },
     { text: 'Settings', icon: <SettingsIcon fontSize="small" />, path: '/dashboard/settings', allowedRoles: ['Admin'] },
   ];
 
-  // Your Master Data sub-items
+  // Master Data sub-items
   const masterDataSubItems = [
     { text: 'Product Master', path: '/dashboard/master-data/product' },
     { text: 'Buyer Master', path: '/dashboard/master-data/buyer' },
     { text: 'Manufacturer Master', path: '/dashboard/master-data/manufacturer' },
     { text: 'Range/Division', path: '/dashboard/master-data/range' },
     { text: 'Exporter', path: '/dashboard/master-data/Exporter' },
+    { text: 'Bank Master', path: '/dashboard/master-data/bank' },
   ];
+
+  // Reports sub-items (નવા ઉમેરેલા રિપોર્ટ સબ-ઓપ્શન્સ)
+ const reportsSubItems = [
+  { text: 'Party Wise Report', path: '/dashboard/party-wise' },
+  { text: 'Item Wise Report', path: '/dashboard/item-wise' },
+];
 
   const canViewMasterData = ['Admin', 'Team Leader'].includes(user?.role);
 
   return (
-    <div className="flex flex-col h-screen bg-[#F4F6F9] font-sans overflow-hidden relative text-slate-800  transition-colors duration-300">
+    <div className="flex flex-col h-screen bg-[#F4F6F9] font-sans overflow-hidden relative text-slate-800 transition-colors duration-300">
       
       {/* HEADER - Top Navbar */}
       <header className="h-[64px] bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 z-10 shrink-0 shadow-sm w-full">
@@ -244,7 +257,7 @@ const DashboardLayout = () => {
                   <Link
                     to={item.path}
                     className={`flex items-center py-3 transition-all duration-200 ${isCollapsed ? 'justify-center px-0' : 'gap-3 px-6'} ${active
-                        ? 'bg-[#1D70F5] text-white font-bold'
+                        ? 'text-[#1D70F5] bg-slate-700/40 font-bold'
                         : 'text-slate-300 hover:bg-slate-700/40 hover:text-white'
                       }`}
                     title={isCollapsed ? item.text : ''}
@@ -276,6 +289,47 @@ const DashboardLayout = () => {
                       {isMasterDataOpen && !isCollapsed && (
                         <div className="py-1 bg-[#1A202A] border-l-2 border-slate-600 ml-6">
                           {masterDataSubItems.map((subItem) => {
+                            const subActive = location.pathname === subItem.path;
+                            return (
+                              <Link
+                                key={subItem.text}
+                                to={subItem.path}
+                                className={`flex items-center gap-2 pl-4 pr-4 py-2 text-[13px] transition-colors ${subActive ? 'text-[#1D70F5] font-bold' : 'text-slate-400 hover:text-white'
+                                  }`}
+                              >
+                                <span className="text-[10px] font-bold text-slate-500">»</span>
+                                <span className="truncate">{subItem.text}</span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Reports Dropdown (નવું ઉમેરેલ ડ્રોપડાઉન) */}
+                  {isDashboard && (
+                    <div className="mt-1 mb-1">
+                      <div
+                        onClick={() => {
+                          if (isCollapsed) setIsCollapsed(false);
+                          setIsReportsOpen(!isReportsOpen);
+                        }}
+                        className={`flex items-center py-3 text-slate-300 hover:bg-slate-700/40 hover:text-white cursor-pointer transition-all ${isCollapsed ? 'justify-center px-0' : 'justify-between px-6'}`}
+                        title={isCollapsed ? "Reports" : ""}
+                      >
+                        <div className={`flex items-center ${isCollapsed ? '' : 'gap-3'}`}>
+                          <span className="shrink-0"><AssessmentIcon fontSize="small" /></span>
+                          {!isCollapsed && <span className="font-bold truncate">Reports</span>}
+                        </div>
+                        {!isCollapsed && (
+                          isReportsOpen ? <KeyboardArrowUpIcon fontSize="small" /> : <KeyboardArrowDownIcon fontSize="small" />
+                        )}
+                      </div>
+
+                      {isReportsOpen && !isCollapsed && (
+                        <div className="py-1 bg-[#1A202A] border-l-2 border-slate-600 ml-6">
+                          {reportsSubItems.map((subItem) => {
                             const subActive = location.pathname === subItem.path;
                             return (
                               <Link

@@ -2495,7 +2495,7 @@ const MasterForm = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 min-h-screen bg-slate-50 transition-colors">
+    <div className="min-h-screen bg-slate-50 transition-colors">
       
       {/* HEADER WITH BACK BUTTON */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

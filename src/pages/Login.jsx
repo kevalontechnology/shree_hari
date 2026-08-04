@@ -54,9 +54,9 @@ const Login = () => {
         
         <div className="flex flex-col items-center justify-center text-center mb-8">
           <div className="flex items-center justify-center mb-4 w-full">
-            <div className="flex items-center justify-center h-12">
-              <img src={companyLogo} alt="Shree Hari Logo" className="h-10 w-auto object-contain hidden sm:block" />
-              <img src={companyLogo} alt="Shree Hari Logo" className="h-8 w-auto object-contain sm:hidden" />
+            <div className="flex items-center justify-center h-14" >
+              <img src={companyLogo} alt="Shree Hari Logo" className="h-14 w-auto object-contain hidden sm:block" />
+              <img src={companyLogo} alt="Shree Hari Logo" className="h-12 w-auto object-contain sm:hidden" />
             </div>
           </div>
           <p className="text-xs font-semibold text-indigo-600 mt-2 bg-indigo-50 inline-block px-3 py-1 rounded-full text-center">Export Documentation CRM</p>
